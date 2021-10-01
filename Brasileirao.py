@@ -22,7 +22,11 @@ def alterar_arena(db_brasileirao):
         'Mário Helênio': 'Limeirão',
         'Mj José Levi Sobrinho': 'Municipal Juiz de Fora',
         'Neo Química Arena': 'Itaqueirão',
+<<<<<<< HEAD
         'Nilton Santos (Engenhão)': 'Engenhão',
+=======
+        'Nilton Santos (Engenhão)':'Engenhão',
+>>>>>>> d87a813236adac5903eb60bbc5b57e4a233e8dcd
         'Papa J.Paulo II': 'Vail Chaves',
         'Pedro Pedrossian': 'Morenão',
         'Plácido Castelo': 'Castelão',
@@ -55,7 +59,11 @@ def alterar_clubes(db_brasileirao):
 def gerar_tabela_campanha(db_brasileirao, list_club_ano):
     """
     P: PM + PV + PP
+<<<<<<< HEAD
     Ps: Pontos Asteriscos
+=======
+    PP: Pontos de Punição
+>>>>>>> d87a813236adac5903eb60bbc5b57e4a233e8dcd
     V: Vitórias (VM + VV)
     E: Empates (EM + EV)
     D: Derrotas (DM + DV)
@@ -272,7 +280,10 @@ def print_list(list):
     for element in list:
         print(element)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d87a813236adac5903eb60bbc5b57e4a233e8dcd
 # SET_OPTION
 pd.set_option('display.max_columns', 15)
 pd.set_option('display.min_rows', 50)
@@ -280,11 +291,16 @@ pd.set_option('display.max_rows', 50)
 pd.set_option('display.width', 400)
 
 path_brasileirao = "campeonato-brasileiro-full.csv"
+<<<<<<< HEAD
 path_pontosasterisco = "pontosasterisco.csv"
 
 db_brasileirao = pd.read_csv(path_brasileirao, delimiter=';')
 tbl_pontosasterisco = pd.read_csv(path_pontosasterisco, delimiter=';')
 
+=======
+
+db_brasileirao = pd.read_csv(path_brasileirao, delimiter=';')
+>>>>>>> d87a813236adac5903eb60bbc5b57e4a233e8dcd
 db_brasileirao = db_brasileirao.drop(columns=['Estado Mandante', 'Estado Visitante', 'Estado Vencedor'])
 db_brasileirao['Mandante'] = db_brasileirao['Mandante'].str.title()
 db_brasileirao['Visitante'] = db_brasileirao['Visitante'].str.title()
@@ -300,6 +316,7 @@ list_arena = sorted(db_brasileirao['Arena'].drop_duplicates().dropna())
 
 list_club_ano = gerar_lista_clubes_ano(db_brasileirao)
 
+<<<<<<< HEAD
 """
 print(tbl_pontosasterisco)
 print(f'===TIPOS DAS COLUNAS===\n{db_brasileirao.dtypes}')     # Tipos das Colunas
@@ -311,3 +328,14 @@ print_list(list_arena)
 """
 
 gerar_tabela_campanha(db_brasileirao, list_club_ano)
+=======
+#print(f'===TIPOS DAS COLUNAS===\n{db_brasileirao.dtypes}')     # Tipos das Colunas
+#print(f'===RESULTADOS===\n{db_brasileirao}')
+#print(f'\n===CLUBES=== {len(list_club)} clubes')
+#print_list(list_club)
+#print(f'\n===ESTÁDIOS=== {len(list_arena)} estádios')
+#print_list(list_arena)
+
+gerar_tabela_campanha(db_brasileirao, list_club_ano)
+
+>>>>>>> d87a813236adac5903eb60bbc5b57e4a233e8dcd
