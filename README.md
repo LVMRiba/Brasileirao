@@ -1,7 +1,7 @@
 # Brasileirao
 Análise de Dados com o Campeonato Brasileiro de pontos corridos
 
-FUTURE PLANS:
+### FUTURE PLANS:
 - Modularizar Código
 - Otimizar Fonte de Dados
 - Criar Interface Gráfica
@@ -13,12 +13,12 @@ FUTURE PLANS:
 - Análise de dados quanto ao rebaixamento por desempenho recente (Rebaixamento Promédio)
 - Análise de dados quanto ao placar agregado (Alternate Trophy)
 
-CHANGELOG:
-0.11
+### CHANGELOG:
+#### 0.11
 - Adição de nova tabela "pontosasterisco.csv"
 - Leitura da tabela "pontosasterisco.csv"
 
-0.1
+#### 0.1
 - Criação da função "alterar_arena"
 - Criação da função "alterar_clube"
 - Criação da função "gerar_tabela_campanha"
