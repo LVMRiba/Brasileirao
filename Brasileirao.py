@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import date
+import codecs   # HABILITAR UTF-8
 
 ANO_FIXO = 2006
 ANO_ATUAL = date.today().year
@@ -36,7 +37,7 @@ def alterar_arena(db_brasileirao):
     return db_brasileirao['Arena']
 
 
-def alterar_clubes(db_brasileirao):
+def alterar_clube(db_brasileirao):
     db_brasileirao[['Mandante', 'Visitante', 'Vencedor']] = db_brasileirao[['Mandante', 'Visitante', 'Vencedor']].replace({
         'América-Mg': 'América-MG',
         'América-Rn': 'América-RN',
@@ -56,8 +57,6 @@ def gerar_tabela_campanha(db_brasileirao, list_club_ano):
     """
     P: PM + PV + PP
     Ps: Pontos Asteriscos
-    PP: Pontos de Punição
-    
     V: Vitórias (VM + VV)
     E: Empates (EM + EV)
     D: Derrotas (DM + DV)
@@ -89,21 +88,17 @@ def gerar_tabela_campanha(db_brasileirao, list_club_ano):
     GSE: Gols sofridos no Turno 2
     """
 
-    for i in range(2003, 2005):
-        print(f'EDICAO {i}')
-        print(i == 2003)
+    for i in range(2003, ANO_ATUAL):
+        print(f'Edição {i}')
         if i in [2003, 2004]:
-            round_med = int(23)
-            print('São 23 jogos por turno')
+            round_med = int(23) # São 23 jogos por turno
         elif i == 2005:
-            round_med = int(21)
-            print('São 21 jogos por turno')
+            round_med = int(21) # São 21 jogos por turno
         else:
-            round_med = int(19)
-            print('São 19 jogos por turno')
+            round_med = int(19) # São 19 jogos por turno
 
         for club in list_club_ano[str(i)]:
-            # DADOS HOME & AWAY
+            # DATA: HOME & AWAY
             VH = int(db_brasileirao['Resultado'].loc[(db_brasileirao['Edicao'] == i) &
                                                      (db_brasileirao['Mandante'] == club) &
                                                      (db_brasileirao['Resultado'] == 'M')].count())
@@ -141,8 +136,7 @@ def gerar_tabela_campanha(db_brasileirao, list_club_ano):
             GF = GFH + GFA
             GS = GSH + GSA
 
-            # DADOS OPENING & ENDING
-
+            # DATA: OPENING & ENDING
             VO = int(db_brasileirao['Resultado'].loc[(db_brasileirao['Edicao'] == i) &
                                                      (db_brasileirao['Rodada'].astype(int) <= round_med) &
                                                      (db_brasileirao['Mandante'] == club) &
@@ -195,8 +189,6 @@ def gerar_tabela_campanha(db_brasileirao, list_club_ano):
             PO = 3*VO + EO
             PE = 3*VE + EE
 
-            # Continuar a partir daqui:
-
             GFO = int(db_brasileirao['Mandante Placar'].loc[(db_brasileirao['Edicao'] == i) &
                                                             (db_brasileirao['Rodada'].astype(int) <= round_med) &
                                                             (db_brasileirao['Mandante'] == club)].sum()) + \
@@ -222,15 +214,20 @@ def gerar_tabela_campanha(db_brasileirao, list_club_ano):
                                                             (db_brasileirao['Rodada'].astype(int) > round_med) &
                                                             (db_brasileirao['Mandante'] == club)].sum())
 
-            # PRINT DE DADOS
-            print(f'{club.upper()}:'
-                  f'\nM\tP\tV\tE\tD\tGF\tGS\t'
-                  f'\nL\t{P}\t{V}\t{E}\t{D}\t{GF}\t{GS}\t'
-                  f'\nH\t{PH}\t{VH}\t{EH}\t{DH}\t{GFH}\t{GSH}\t'
-                  f'\nA\t{PA}\t{VA}\t{EA}\t{DA}\t{GFA}\t{GSA}\t'
-                  f'\nO\t{PO}\t{VO}\t{EO}\t{DO}\t{GFO}\t{GSO}\t'
-                  f'\nE\t{PE}\t{VE}\t{EE}\t{DE}\t{GFE}\t{GSE}\t')
-        print('\n')
+            campaign = []
+            campaign_lg = {'Club': club, 'Year': i, 'Mode': 'LG', 'P': P, 'V': V, 'E': E, 'D': D, 'GF': GF, 'GS': GS}
+            campaign_hm = {'Club': club, 'Year': i, 'Mode': 'HM', 'P': PH, 'V': VH, 'E': EH, 'D': DH, 'GF': GFH, 'GS': GSH}
+            campaign_aw = {'Club': club, 'Year': i, 'Mode': 'AW', 'P': PA, 'V': VA, 'E': EA, 'D': DA, 'GF': GFA, 'GS': GSA}
+            campaign_op = {'Club': club, 'Year': i, 'Mode': 'OP', 'P': PO, 'V': VO, 'E': EO, 'D': DO, 'GF': GFO, 'GS': GSO}
+            campaign_ed = {'Club': club, 'Year': i, 'Mode': 'ED', 'P': PE, 'V': VE, 'E': EE, 'D': DE, 'GF': GFE, 'GS': GSE}
+
+            campaign.append(campaign_lg)
+            campaign.append(campaign_hm)
+            campaign.append(campaign_aw)
+            campaign.append(campaign_op)
+            campaign.append(campaign_ed)
+
+            write_file(campaign)
 
 
 def gerar_tabela_edicao(db_brasileirao):
@@ -261,7 +258,7 @@ def gerar_tabela_resultado(db_brasileirao):
     return db_brasileirao['Resultado']
 
 
-def gerar_lista_clubes_ano(db_brasileirao):
+def gerar_lista_clube_ano(db_brasileirao):
     clubs = {}
     for i in range(2003, ANO_ATUAL):
         ano = f'{i}'
@@ -274,6 +271,17 @@ def print_list(list):
     for element in list:
         print(element)
 
+
+def write_file(data):
+    file = codecs.open('table_campaign.csv', 'a', 'utf-8')
+
+    for i in range(0, 5):
+        #print(f"{data[i]['Club']}; {data[i]['Year']}; {data[i]['Mode']}; {data[i]['P']}; {data[i]['V']}; {data[i]['E']}; {data[i]['D']}; {data[i]['GF']}; {data[i]['GS']}")
+        file.write(f"{data[i]['Club']};{data[i]['Year']};{data[i]['Mode']};{data[i]['P']};{data[i]['V']};{data[i]['E']};{data[i]['D']};{data[i]['GF']};{data[i]['GS']}\n")
+
+    file.close()
+
+
 # SET_OPTION
 pd.set_option('display.max_columns', 15)
 pd.set_option('display.min_rows', 50)
@@ -282,16 +290,18 @@ pd.set_option('display.width', 400)
 
 path_brasileirao = "campeonato-brasileiro-full.csv"
 path_pontosasterisco = "pontosasterisco.csv"
+path_campanhas = "table_campaign.csv"
 
 db_brasileirao = pd.read_csv(path_brasileirao, delimiter=';')
 tbl_pontosasterisco = pd.read_csv(path_pontosasterisco, delimiter=';')
+tbl_campanhas = pd.read_csv(path_campanhas, delimiter=';')
 
 db_brasileirao = db_brasileirao.drop(columns=['Estado Mandante', 'Estado Visitante', 'Estado Vencedor'])
 db_brasileirao['Mandante'] = db_brasileirao['Mandante'].str.title()
 db_brasileirao['Visitante'] = db_brasileirao['Visitante'].str.title()
 db_brasileirao['Vencedor'] = db_brasileirao['Vencedor'].str.title()
 db_brasileirao = db_brasileirao.loc[db_brasileirao['ID'] >= 1054]       # Filtra resultados a partir de 2003
-db_brasileirao[['Mandante', 'Visitante', 'Vencedor']] = alterar_clubes(db_brasileirao)      # Mudar nome de Clubes
+db_brasileirao[['Mandante', 'Visitante', 'Vencedor']] = alterar_clube(db_brasileirao)      # Mudar nome de Clubes
 db_brasileirao['Arena'] = alterar_arena(db_brasileirao)                 # Mudar nome de Arenas
 db_brasileirao['Resultado'] = gerar_tabela_resultado(db_brasileirao)    # Otimizar o vencedor da partida
 db_brasileirao['Edicao'] = gerar_tabela_edicao(db_brasileirao)          # Definir edicao do campeonato
@@ -299,7 +309,11 @@ db_brasileirao['Edicao'] = gerar_tabela_edicao(db_brasileirao)          # Defini
 list_club = sorted(db_brasileirao['Mandante'].drop_duplicates())
 list_arena = sorted(db_brasileirao['Arena'].drop_duplicates().dropna())
 
-list_club_ano = gerar_lista_clubes_ano(db_brasileirao)
+list_club_ano = gerar_lista_clube_ano(db_brasileirao)
+
+#gerar_tabela_campanha(db_brasileirao, list_club_ano)
+
+print(tbl_campanhas)
 
 """
 print(tbl_pontosasterisco)
@@ -310,5 +324,3 @@ print_list(list_club)
 print(f'\n===ESTÁDIOS=== {len(list_arena)} estádios')
 print_list(list_arena)
 """
-
-gerar_tabela_campanha(db_brasileirao, list_club_ano)
