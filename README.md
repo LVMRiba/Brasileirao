@@ -14,6 +14,12 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Análise de dados quanto ao placar agregado (Alternate Trophy)
 
 ### CHANGELOG:
+
+#### 0.15
+- Criação da função "write_file"
+- Adição de nova tabela "table_campaign.csv"
+- Leitura da tabela "table_campaign.csv"
+
 #### 0.11
 - Adição de nova tabela "pontosasterisco.csv"
 - Leitura da tabela "pontosasterisco.csv"
