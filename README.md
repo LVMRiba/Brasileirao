@@ -5,15 +5,22 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Modularizar Código
 - Otimizar Fonte de Dados
 - Criar Interface Gráfica
+- Histórico de Confrontos
 - Análise de dados quanto aos pontos corridos (League Trophy)
 - Análise de dados quanto aos resultados do 1ºturno (Opening Trophy)
 - Análise de dados quanto aos resultados do 2ºturno (Closing Trophy)
 - Análise de dados quanto aos resultados como Mandante (Home Trophy)
 - Análise de dados quanto aos resultados como Visitante (Away Trophy)
 - Análise de dados quanto ao rebaixamento por desempenho recente (Rebaixamento Promédio)
-- Análise de dados quanto ao placar agregado (Alternate Trophy)
+- Análise de dados quanto ao placar agregado (Aggregate Trophy)
 
 ### CHANGELOG:
+
+#### 0.20
+- Criação da função "gerar_tabela_agregado"
+- Adição de nova tabela "agregate_campaign.csv"
+- Leitura da tabela "agregate_campaign.csv"
+- Mudança de nome de função: "write_file" -> "write_file_campaign"
 
 #### 0.15
 - Criação da função "write_file"
