@@ -13,8 +13,13 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Análise de dados quanto aos resultados como Visitante (Away Trophy)
 - Análise de dados quanto ao rebaixamento por desempenho recente (Rebaixamento Promédio)
 - Análise de dados quanto ao placar agregado (Aggregate Trophy)
+- Rendimento por rodadas
 
 ### CHANGELOG:
+
+#### 0.22
+- Criação do módulo "module_gen"
+- Criação do módulo "module_alterar"
 
 #### 0.20
 - Criação da função "gerar_tabela_agregado"
