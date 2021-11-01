@@ -2,9 +2,9 @@
 Análise de Dados com o Campeonato Brasileiro de pontos corridos
 
 ### FUTURE PLANS:
-- Modularizar Código
+- :heavy_check_mark: Modularizar Código
 - Otimizar Fonte de Dados
-- Criar Interface Gráfica
+- :heavy_check_mark: Criar Interface Gráfica
 - Histórico de Confrontos
 - Análise de dados quanto aos pontos corridos (League Trophy)
 - Análise de dados quanto aos resultados do 1ºturno (Opening Trophy)
@@ -16,6 +16,12 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Rendimento por rodadas
 
 ### CHANGELOG:
+
+#### 0.28
+- Biblioteca Tkinter: Habilitação de Interface Gráfica
+- Criação do módulo "main". O novo módulo principal do projeto.
+- Transição do Corpo do Código para uso de Classes
+- Transição dos nomes e comentários para o Inglês
 
 #### 0.22
 - Criação do módulo "module_gen"
