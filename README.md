@@ -17,6 +17,14 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 
 ### CHANGELOG:
 
+#### 0.32
+- Modularização ampla do código
+- Criação do módulo "generators". Módulo de criação de dados
+- Criação do módulo "files". Módulo de controle de arquivos
+- Criação do módulo "manager". Módulo de transformação de dados
+- Criação do módulo "main_library". Módulo de importação das bibliotecas
+- Arquivamento de códigos ultrapassados
+
 #### 0.28
 - Biblioteca Tkinter: Habilitação de Interface Gráfica
 - Criação do módulo "main". O novo módulo principal do projeto.
