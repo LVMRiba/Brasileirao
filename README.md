@@ -14,6 +14,7 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Análise de dados quanto ao rebaixamento por desempenho recente (Rebaixamento Promédio)
 - Análise de dados quanto ao placar agregado (Aggregate Trophy)
 - Rendimento por rodadas
+- Previsão de Resultados (necessário aprendizado e uso de Machine Learning)
 
 ### CHANGELOG:
 
@@ -23,7 +24,7 @@ Análise de Dados com o Campeonato Brasileiro de pontos corridos
 - Criação do módulo "files". Módulo de controle de arquivos
 - Criação do módulo "manager". Módulo de transformação de dados
 - Criação do módulo "main_library". Módulo de importação das bibliotecas
-- Arquivamento de códigos ultrapassados
+- Arquivamento de códigos ultrapassados na pasta "old files" 
 
 #### 0.28
 - Biblioteca Tkinter: Habilitação de Interface Gráfica
