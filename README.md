@@ -1,5 +1,5 @@
 # Brasileirao
-Análise de Dados com o Campeonato Brasileiro de pontos corridos
+Projeto de Consulta de Banco de Dados do Campeonato Brasileiro de pontos corridos (2003-2021)
 
 ### FUTURE PLANS:
 - :heavy_check_mark: Modularizar Código
